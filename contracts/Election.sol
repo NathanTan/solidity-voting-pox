@@ -13,11 +13,9 @@ contract Election {
     // Fetch Candidate
     mapping(uint => Candidate) public candidates;
 
-
     // In solidity there is no way to check the size of a mapping or iterate over the key-value pairs
     // So we keep track of the count
     uint public candidateCount;
-
 
     // Store candidate 
     string public candidate;
@@ -25,13 +23,14 @@ contract Election {
 
     constructor () public {
         // Initialize state variable
-        candidate = "Godzilla";
+        addCandidate("Godzilla");
+        addCandidate("Mothra");
     }
 
 
-    function addCandidate (string _name) private {
+    // The memory keyword creates a var in dynamic memory and will not be stored
+    function addCandidate (string memory name) private {
         candidateCount++;
-        candidates[candidateCount] = Candidate(candidateCount, _name, 0);
+        candidates[candidateCount] = Candidate(candidateCount, name, 0);
     }
-
 }
